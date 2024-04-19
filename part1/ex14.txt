@@ -1,0 +1,10 @@
+Commands used to run:
+
+FRONTEND:
+docker run -p 5000:5000 ex12
+
+BACKEND:
+docker run -p 8080:8080 ex13
+
+Frontend Dockerfile is located in folder ./ex12
+Backend Dockerfile is located in folder ./ex13

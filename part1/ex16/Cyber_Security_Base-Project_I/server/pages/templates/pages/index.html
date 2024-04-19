@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Bank Transfer</title>
+    </head>
+
+
+    <body>
+		<h1>Your account</h1>
+
+		<span><b>Username: </b>{{user.username}} </span><br>
+		<span><b>Balance: </b>{{user.account.balance}}</span><br>
+
+
+        <form action='logout/' method="POST">
+            {% csrf_token %}  
+            <input type="submit" value="Logout"/>
+        </form>
+		
+        <h2>Transfer money</h2>
+
+        <form action='transfer/' method="GET" id="transfer">
+
+        <!-- FIX 3 - Change line above to use POST method and add csrf protection.
+            The correct two lines are:
+        <form action='transfer/' method="POST" id="transfer">
+            {% csrf_token %} -->
+            
+            <span>To:</span><br/>
+            <select name="to">
+			{% for account in accounts %}
+                <option value="{{account.user.username}}">{{account.user.username}}</option>
+			{% endfor %}
+            </select><br/>
+
+            <span>Amount:</span><br/>
+            <input type="number" name="amount"/><br/>
+
+            <span>Message:</span><br>
+            <textarea name="message" id="transfer" cols="30" rows="3"></textarea><br>
+
+            <input type="submit" value="Transfer"/>
+        </form><br>
+
+        <form action="transactions/{{user.username}}" method="GET">
+            <input type="submit" value="Check your transaction history">
+        </form><br>
+
+
+        <h2>Find all events by specific sender</h2>
+
+        <form action='check/' method="POST">
+            {% csrf_token %}                
+            <span>Name:</span><br/>
+            <input type="text" name="name"/><br/>  
+            <input type="submit" value="Check"/><br>
+        </form>
+
+    </body>
+</html>

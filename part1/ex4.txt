@@ -1,0 +1,8 @@
+Commands I used to run container and fix the ensuing problems:
+
+docker run -it ubuntu bash
+apt-get update
+apt-get -y install curl
+sh -c "while true; do echo 'Input website:'; read website; echo 'Searching..'; sleep 1; curl http://$website; done"
+
+After that the app asks website, and with input 'helsinki.fi' we get desired response.
