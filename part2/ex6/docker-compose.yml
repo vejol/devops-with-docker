@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ../../part1/ex12/
+    ports:
+      - 5000:5000
+  backend:
+    build: ../../part1/ex13/
+    ports:
+      - 8080:8080
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=example
+    depends_on:
+      - db
+  redis:
+    image: redis
+    restart: unless-stopped
+  db:
+    image: postgres:16.2-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
