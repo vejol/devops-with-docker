@@ -1,0 +1,13 @@
+FROM alpine:3.19.1
+
+WORKDIR /usr/src/app
+
+COPY ./script.sh .
+
+RUN apk add --no-cache curl && \
+  rm -rf /var/lib/apt/lists/* && \
+  adduser -D appuser
+
+USER appuser
+
+CMD sh ./script.sh
